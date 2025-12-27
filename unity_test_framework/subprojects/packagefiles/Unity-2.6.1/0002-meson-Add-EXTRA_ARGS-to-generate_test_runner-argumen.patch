@@ -1,0 +1,27 @@
+From 5350975c775b2a64a7cc6432cc0cc30fc146bec9 Mon Sep 17 00:00:00 2001
+From: Dominik Loidolt <dominik.loidolt@univie.ac.at>
+Date: Thu, 17 Apr 2025 13:41:26 +0200
+Subject: [PATCH 2/2] meson: Add '@EXTRA_ARGS@' to generate_test_runner
+ arguments
+
+Extended the argument list in meson generator for the test
+runner strict by adding '@EXTRA_ARGS@'. This change enables the test
+runner script to accept additional configuration parameters alongside
+'@INPUT@' and '@OUTPUT@', increasing its flexibility.
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 6585129..5e9f463 100644
+--- a/meson.build
++++ b/meson.build
+@@ -76,5 +76,5 @@ endif
+ gen_test_runner = generator(
+   find_program('auto/generate_test_runner.rb'),
+   output: '@BASENAME@_Runner.c',
+-  arguments: ['@INPUT@', '@OUTPUT@']
++  arguments: ['@EXTRA_ARGS@', '@INPUT@', '@OUTPUT@']
+ )
+--
+2.49.0
